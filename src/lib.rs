@@ -108,19 +108,19 @@ fn test_superif() {
     });
 }
 
-/// Type-assert return type: explicitly communicate the
-/// `Ok`` block return type to the compiler via unreachable code. This relies on a single-argument `Result`
-/// type being available.
+/// Type-assert return type: explicitly communicate the `Ok` return type for the
+/// block to the compiler via unreachable code.
 ///
-/// Use like `ta_return!(i32);`
+/// Use like `ta_return!(i32, MyError);`
 #[macro_export]
 macro_rules! ta_return{
-    ($t: ty) => {
+    ($t: ty, $e: ty) => {
         if false {
             fn unreachable_value<T>() -> T {
                 panic!();
             }
-            return std:: result:: Result::< $t >:: Ok(unreachable_value());
+            return std:: result:: Result::< $t,
+            $e >:: Ok(unreachable_value());
         }
     }
 }
