@@ -84,15 +84,16 @@ macro_rules! superif{
     } $i: ident = $l: lifetime {
         $($t2: tt) *
     }) => {
-        'superif: loop {
-            let $i = $l: loop {
-                // Double loop to catch unlabeled break
-                #[allow(unreachable_code)] break 'superif(loop {
-                    break 'superif({
-                        $($t) *
-                    });
-                })
+        $crate:: shed ! {
+            'superif _;
+            // Condition
+            let $i = shed ! {
+                $l _;
+                break 'superif $crate:: shed ! {
+                    $($t) *
+                };
             };
+            // Else
             $($t2) *
         }
     }
