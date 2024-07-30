@@ -73,7 +73,7 @@ macro_rules! superif{
     } $l: lifetime {
         $($t2: tt) *
     }) => {
-        superif!({
+        $crate:: superif !({
             $($t) *
         } _unused = $l {
             $($t2) *
@@ -87,7 +87,7 @@ macro_rules! superif{
         $crate:: shed ! {
             'superif _;
             // Condition
-            let $i = shed ! {
+            let $i = $crate:: shed ! {
                 $l _;
                 break 'superif $crate:: shed ! {
                     $($t) *
