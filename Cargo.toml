@@ -1,6 +1,6 @@
 [package]
 name = "flowcontrol"
-version = "0.2.2"
+version = "0.2.3"
 edition = "2021"
 description = "Utilities for clarifying and simplifying control flow"
 readme = "readme.md"
