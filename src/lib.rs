@@ -125,3 +125,17 @@ macro_rules! ta_return{
         }
     }
 }
+
+/// Convert an enum to an option:
+///
+/// Use like
+/// `let (x, y, z) = exenum!(res, MyEnum::Value(x, y, z) => (x, y, z)).unwrap()`.
+#[macro_export]
+macro_rules! exenum{
+    ($s: expr, $m: pat => $v: expr) => {
+        match $s {
+            $m => Some($v),
+            _ => None,
+        }
+    }
+}
